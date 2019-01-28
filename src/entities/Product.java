@@ -2,12 +2,18 @@ package entities;
 
 import java.util.Random;
 
+import util.Factory;
+
 public class Product {
 	
 	private int id;
 	private String name;
 	private double price;
 	private Order order;
+	
+	public Product() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Product(Order order, String name, double price) {
 		this.name = name;
@@ -16,6 +22,7 @@ public class Product {
 //		this.id = (int) (Math.random() * 50 + 1);
 		this.order = order;
 		this.price = price;
+		Factory.productFactory.add(this);
 	}
 
 	public double getPrice() {

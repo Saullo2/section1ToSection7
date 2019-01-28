@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import util.Factory;
+
 public class Order {
 
 	private List<Product> products;
@@ -12,6 +14,10 @@ public class Order {
 	private int id;
 	private Customer customer;
 
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Order(Customer customer, String description) {
 		this.description = description;
 		this.customer = customer;
@@ -19,6 +25,7 @@ public class Order {
 //		Current date
 		this.dateOfOrder = new Date();
 		products = new ArrayList<Product>();
+		Factory.orderFactory.add(this);
 	}
 
 	public List<Product> getProducts() {
