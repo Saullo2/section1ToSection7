@@ -1,6 +1,8 @@
 package entities;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class Order {
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Order(Customer customer, String description) {
 		this.description = description;
 		this.customer = customer;
@@ -85,6 +87,45 @@ public class Order {
 		String result = "Order - ID: " + this.id + ", Date: " + this.dateOfOrder + ", Related Customer: "
 				+ this.customer;
 
+		return result;
+	}
+
+	public String timeSinceOrdered() {
+//		
+//		Date today = new Date();
+//		Calendar c = Calendar.getInstance();
+//		c.setTime(today);
+//		c.add(Calendar.DAY_OF_MONTH, - today.getDay());
+//		c.add(Calendar.MONTH, - today.getMonth());
+//		c.add(Calendar.YEAR, - today.getYear());
+//		
+//		Date difference = c.getTime();
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+//		
+//		
+//		return sdf.format(difference);
+
+		Date today = new Date();
+
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		c1.setTime(today);
+		c2.setTime(dateOfOrder);
+
+		Calendar c3 = Calendar.getInstance();
+		c3.setTime(new Date(Duration.between(c1.toInstant(), c2.toInstant()).toMillis()));
+		int days = c3.DAY_OF_MONTH;
+		int months = c3.MONTH;
+		int years = c3.YEAR;
+		
+		String result = "";
+		result += (days >= 1) ? days + " days ": "";
+		result += (months >= 1) ? months + " months ": "";
+		result += (years >= 1) ? years + " years ": "";
+		result += " since the date you ordered the product.";
+		
 		return result;
 	}
 
