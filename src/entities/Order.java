@@ -1,10 +1,12 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import util.Factory;
 
@@ -91,21 +93,21 @@ public class Order {
 	}
 
 	public String timeSinceOrdered() {
+
+		Date today2 = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(today2);
+		c.add(Calendar.DAY_OF_MONTH, -dateOfOrder.getDay());
+		c.add(Calendar.MONTH, -dateOfOrder.getMonth());
+		c.add(Calendar.YEAR, -dateOfOrder.getYear());
+
+		Date difference = c.getTime();
+
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		sdf2.setTimeZone(TimeZone.getTimeZone("GMT"));
 //		
-//		Date today = new Date();
-//		Calendar c = Calendar.getInstance();
-//		c.setTime(today);
-//		c.add(Calendar.DAY_OF_MONTH, - today.getDay());
-//		c.add(Calendar.MONTH, - today.getMonth());
-//		c.add(Calendar.YEAR, - today.getYear());
 //		
-//		Date difference = c.getTime();
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-//		
-//		
-//		return sdf.format(difference);
+//		return sdf2.format(difference);
 
 		Date today = new Date();
 
@@ -119,13 +121,13 @@ public class Order {
 		int days = c3.DAY_OF_MONTH;
 		int months = c3.MONTH;
 		int years = c3.YEAR;
-		
+
 		String result = "";
-		result += (days >= 1) ? days + " days ": "";
-		result += (months >= 1) ? months + " months ": "";
-		result += (years >= 1) ? years + " years ": "";
+		result += (days >= 1) ? days + " days " : "";
+		result += (months >= 1) ? months + " months " : "";
+		result += (years >= 1) ? years + " years " : "";
 		result += " since the date you ordered the product.";
-		
+
 		return result;
 	}
 
